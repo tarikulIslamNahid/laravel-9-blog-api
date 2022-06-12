@@ -24,5 +24,6 @@ Route::prefix('/admin')->group(function(){
         Route::get('/categories', 'index');
         Route::post('/category/store', 'store');
         Route::post('/category/update', 'update');
+        Route::delete('/category/destroy/{id}', 'destroy');
     });
 });

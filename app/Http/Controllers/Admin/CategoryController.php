@@ -79,16 +79,24 @@ class CategoryController extends Controller
     public function update(Request $request)
     {
         try {
-
+            $validator = Validator::make($request->all(), [
+                'cat_name'=>['required','string'],
+            ]);
+            if ($validator->fails()) {
+                return response()->json(['success' => false,'data'=>$validator->errors(), 422]);
+            } else {
        $category= Category::findOrFail($request->id);
        if($category){
         $category->cat_name=$request->cat_name;
-        $category->cat_slug=Category::uniqueSlug($request->cat_name);
+        if($request->cat_name!=$category->cat_name){
+            $category->cat_slug=Category::uniqueSlug($request->cat_name);
+        }
         $category->update();
         return response()->json([
             'success'=>true,
             'data'=>'Category Updated Successfully !',
         ]);
+       }
        }
 
 } catch (Exception $e) {
@@ -106,8 +114,26 @@ class CategoryController extends Controller
      * @param  \App\Models\Admin\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        try {
+        $category=Category::findOrFail($id)->delete();
+        if($category){
+            return response()->json([
+                'success'=>true,
+                'data'=>'Category Delete Successfully !',
+            ]);
+        }else{
+            return response()->json([
+                'success'=>false,
+                'data'=>'Some Problem Found !',
+            ]);
+        }
+    } catch (Exception $e) {
+        return response()->json([
+            'success'=>false,
+            'data'=>$e->getMessage(),
+        ]);
+    }
     }
 }
