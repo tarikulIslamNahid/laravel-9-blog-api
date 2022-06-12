@@ -23,5 +23,6 @@ Route::prefix('/admin')->group(function(){
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/categories', 'index');
         Route::post('/category/store', 'store');
+        Route::post('/category/update', 'update');
     });
 });

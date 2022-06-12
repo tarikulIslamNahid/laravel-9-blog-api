@@ -68,27 +68,6 @@ class CategoryController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Admin\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Admin\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -97,9 +76,28 @@ class CategoryController extends Controller
      * @param  \App\Models\Admin\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request)
     {
-        //
+        try {
+
+       $category= Category::findOrFail($request->id);
+       if($category){
+        $category->cat_name=$request->cat_name;
+        $category->cat_slug=Category::uniqueSlug($request->cat_name);
+        $category->update();
+        return response()->json([
+            'success'=>true,
+            'data'=>'Category Updated Successfully !',
+        ]);
+       }
+
+} catch (Exception $e) {
+    return response()->json([
+        'success'=>false,
+        'data'=>$e->getMessage(),
+    ]);
+}
+
     }
 
     /**

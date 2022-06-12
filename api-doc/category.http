@@ -15,3 +15,15 @@ accept: application/json
 "cat_name":" Technology"
 
 }
+
+
+### [ Update Category ]
+POST {{API_URL}}/api/admin/category/update HTTP/1.1
+Content-Type: application/json
+accept: application/json
+
+{
+"id":2,
+"cat_name":" Technology"
+
+}
