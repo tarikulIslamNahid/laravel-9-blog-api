@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Category;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -33,15 +34,6 @@ class CategoryController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -51,7 +43,29 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validator = Validator::make($request->all(), [
+                'cat_name'=>['required','string','unique:categories'],
+            ]);
+            if ($validator->fails()) {
+                return response()->json(['success' => false,'data'=>$validator->errors(), 422]);
+            } else {
+                $category= new Category;
+                $category->cat_name=$request->cat_name;
+                $category->cat_slug=Category::uniqueSlug($request->cat_name);
+                $category->save();
+                return response()->json([
+                    'success'=>true,
+                    'data'=>'Category Created Successfully !',
+                ]);
+            }
+
+        } catch (Exception $e) {
+            return response()->json([
+                'success'=>false,
+                'data'=>$e->getMessage(),
+            ]);
+        }
     }
 
     /**

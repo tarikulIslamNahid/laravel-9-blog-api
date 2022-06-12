@@ -22,5 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('/admin')->group(function(){
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/categories', 'index');
+        Route::post('/category/store', 'store');
     });
 });
