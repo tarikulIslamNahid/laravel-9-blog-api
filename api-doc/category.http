@@ -1,0 +1,6 @@
+@API_URL=http://127.0.0.1:8000
+
+
+GET {{API_URL}}/api/admin/categories HTTP/1.1
+Content-Type: application/json
+accept: application/json

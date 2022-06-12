@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Category;
+use Exception;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,7 +15,22 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        try{
+
+            $categories= Category::orderBy('id','desc')->get();
+            if($categories){
+                return response()->json([
+                    'success'=>true,
+                    'data'=>$categories,
+                ]);
+            }
+        }catch(Exception $e){
+            return response()->json([
+                'success'=>false,
+                'data'=>$e->getMessage(),
+            ]);
+        }
+
     }
 
     /**

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('thumb');
             $table->integer('views')->default(0);
+            $table->integer('created_by');
             $table->timestamps();
         });
     }
