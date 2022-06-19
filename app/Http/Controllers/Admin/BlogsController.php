@@ -16,7 +16,20 @@ class BlogsController extends Controller
      */
     public function index()
     {
-        //
+        try{
+            $blogs= blogs::orderBy('created_at','desc')->with('category')->get();
+            if($blogs){
+                return response()->json([
+                    'success'=>true,
+                    'data'=>$blogs,
+                ]);
+            }
+        }catch(Exception $e){
+            return response()->json([
+                'success'=>false,
+                'data'=>$e->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -53,13 +66,13 @@ class BlogsController extends Controller
                 $blogs->save();
                 $cat_id= substr($request->cat_id, 0, -1);
                 $blogCatArr=explode(',', $cat_id);
-
-                foreach ($blogCatArr as $key => $id) {
-                    $blogCategories= new blogCategories;
-                    $blogCategories->cat_id=$id;
-                    $blogCategories->blog_id=$blogs->id;
-                    $blogCategories->save();
-                }
+                $blogs->category()->attach($blogCatArr);
+                // foreach ($blogCatArr as $key => $id) {
+                //     $blogCategories= new blogCategories;
+                //     $blogCategories->cat_id=$id;
+                //     $blogCategories->blog_id=$blogs->id;
+                //     $blogCategories->save();
+                // }
                 return response()->json([
                     'success'=>true,
                     'data'=>'Post Created Successfully !',

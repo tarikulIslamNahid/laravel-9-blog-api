@@ -35,6 +35,27 @@ class CategoryController extends Controller
     }
 
 
+    public function CategoryBlogs()
+    {
+        try{
+
+            $categories= Category::with('blogs')->get();
+            if($categories){
+                return response()->json([
+                    'success'=>true,
+                    'data'=>$categories,
+                ]);
+            }
+        }catch(Exception $e){
+            return response()->json([
+                'success'=>false,
+                'data'=>$e->getMessage(),
+            ]);
+        }
+
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *

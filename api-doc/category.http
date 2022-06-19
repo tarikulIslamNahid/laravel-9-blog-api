@@ -1,8 +1,14 @@
 @API_URL=http://127.0.0.1:8000
 @TOKEN=Bearer 39|vlIvjTsqNTwVR6Q402tekUY8CaYhtoP3yYvPNXfy
 
-
+### [ All Category ]
 GET {{API_URL}}/api/admin/categories HTTP/1.1
+Content-Type: application/json
+accept: application/json
+Authorization:{{TOKEN}}
+
+### [ Category Blogs ]
+GET {{API_URL}}/api/admin/categories/blogs HTTP/1.1
 Content-Type: application/json
 accept: application/json
 Authorization:{{TOKEN}}

@@ -5,6 +5,7 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use App\Models\Admin\blogs;
 
 class Category extends Model
 {
@@ -13,7 +14,8 @@ class Category extends Model
         'cat_name'
     ];
     public function blogs(){
-        return $this->hasMany(blogCategories::class);
+        return $this->belongsToMany(blogs::class,'blog_categories','cat_id','blog_id');
+
     }
     public static function uniqueSlug($title){
         $slug = Str::slug($title, '-');

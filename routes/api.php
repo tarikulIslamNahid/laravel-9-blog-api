@@ -27,8 +27,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/category/{slug}', 'edit');
     Route::post('/category/update', 'update');
     Route::delete('/category/destroy/{id}', 'destroy');
+    Route::get('/categories/blogs', 'CategoryBlogs');
+
     });
     Route::controller(BlogsController::class)->group(function () {
+    Route::get('/posts', 'index');
     Route::post('/post/store', 'store');
     });
     });
