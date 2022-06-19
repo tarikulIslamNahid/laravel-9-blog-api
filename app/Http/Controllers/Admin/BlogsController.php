@@ -127,8 +127,27 @@ class BlogsController extends Controller
      * @param  \App\Models\Admin\blogs  $blogs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(blogs $blogs)
+    public function destroy($id)
     {
-        //
+        try {
+        $blogs=blogs::findOrFail($id)->delete();
+        if($blogs){
+        blogCategories::where('blog_id',$id)->delete();
+            return response()->json([
+                'success'=>true,
+                'data'=>'Category Delete Successfully !',
+            ]);
+        }else{
+            return response()->json([
+                'success'=>false,
+                'data'=>'Some Problem Found !',
+            ]);
+        }
+    } catch (Exception $e) {
+        return response()->json([
+            'success'=>false,
+            'data'=>$e->getMessage(),
+        ]);
+    }
     }
 }
