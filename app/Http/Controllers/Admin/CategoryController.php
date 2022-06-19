@@ -68,7 +68,20 @@ class CategoryController extends Controller
         }
     }
 
-
+public function edit($slug){
+    try {
+    $category = Category::where('cat_slug',$slug)->first();
+    return response()->json([
+        'success'=>true,
+        'data'=>$category,
+    ]);
+} catch (Exception $e) {
+    return response()->json([
+        'success'=>false,
+        'data'=>$e->getMessage(),
+    ]);
+}
+}
     /**
      * Update the specified resource in storage.
      *

@@ -1,7 +1,7 @@
 @API_URL=http://127.0.0.1:8000
-@TOKEN=5|1eYs7IXGOsFWnlZHyjQor6EdyVeDit3iZfGhjfJG
+@TOKEN=Bearer 37|sMB9VOCEj7xEcYUXXs9R8vXrGqVnoyQvxXOYLqEr
 ### [ Login ]
-POST {{API_URL}}/api/admin/user/login HTTP/1.1
+POST {{API_URL}}/api/user/login HTTP/1.1
 Content-Type: application/json
 accept: application/json
 
@@ -9,6 +9,12 @@ accept: application/json
     "email":" admin@admin.com",
     "password":"12345678"
     }
+### [ Logout ]
+GET {{API_URL}}/api/logout HTTP/1.1
+Content-Type: application/json
+accept: application/json
+Authorization: {{TOKEN}}
+
 
 ### [ Current User ]
 GET {{API_URL}}/api/admins HTTP/1.1
