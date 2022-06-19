@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
+use App\Models\Admin\blogCategories;
 use App\Models\Admin\blogs;
 use Illuminate\Http\Request;
-
+use Exception;
+use Illuminate\Support\Facades\Validator;
 class BlogsController extends Controller
 {
     /**
@@ -35,7 +37,41 @@ class BlogsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validator = Validator::make($request->all(), [
+                'title'=>['required','string','unique:blogs'],
+                'description'=>['required','string'],
+            ]);
+            if ($validator->fails()) {
+                return response()->json(['success' => false,'data'=>$validator->errors(), 422]);
+            } else {
+                $blogs= new blogs;
+                $blogs->title=$request->title;
+                $blogs->description=$request->description;
+                $blogs->created_by=Auth()->user()->id;
+                $blogs->slug=blogs::uniqueSlug($request->title);
+                $blogs->save();
+                $cat_id= substr($request->cat_id, 0, -1);
+                $blogCatArr=explode(',', $cat_id);
+
+                foreach ($blogCatArr as $key => $id) {
+                    $blogCategories= new blogCategories;
+                    $blogCategories->cat_id=$id;
+                    $blogCategories->blog_id=$blogs->id;
+                    $blogCategories->save();
+                }
+                return response()->json([
+                    'success'=>true,
+                    'data'=>'Post Created Successfully !',
+                ]);
+            }
+
+        } catch (Exception $e) {
+            return response()->json([
+                'success'=>false,
+                'data'=>$e->getMessage(),
+            ]);
+        }
     }
 
     /**

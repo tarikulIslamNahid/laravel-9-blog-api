@@ -18,7 +18,6 @@ return new class extends Migration
             $table->mediumText('title');
             $table->mediumText('slug')->unique();
             $table->text('description');
-            $table->string('thumb');
             $table->integer('views')->default(0);
             $table->integer('created_by');
             $table->timestamps();

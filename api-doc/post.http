@@ -1,0 +1,16 @@
+@API_URL=http://127.0.0.1:8000
+@TOKEN=Bearer 39|vlIvjTsqNTwVR6Q402tekUY8CaYhtoP3yYvPNXfy
+
+
+### [ Create post ]
+POST {{API_URL}}/api/admin/post/store HTTP/1.1
+Content-Type: application/json
+accept: application/json
+Authorization:{{TOKEN}}
+
+{
+"title":"this is new title",
+"description":"this is blog content",
+"cat_id":"4,6,"
+
+}

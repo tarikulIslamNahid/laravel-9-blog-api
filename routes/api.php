@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\BlogsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/category/{slug}', 'edit');
     Route::post('/category/update', 'update');
     Route::delete('/category/destroy/{id}', 'destroy');
+    });
+    Route::controller(BlogsController::class)->group(function () {
+    Route::post('/post/store', 'store');
     });
     });
 });

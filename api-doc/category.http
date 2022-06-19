@@ -1,5 +1,5 @@
 @API_URL=http://127.0.0.1:8000
-@TOKEN=Bearer 13|Yu5wb0xbuPK9fWhrKaycY869JThFObvE586NnaeG
+@TOKEN=Bearer 39|vlIvjTsqNTwVR6Q402tekUY8CaYhtoP3yYvPNXfy
 
 
 GET {{API_URL}}/api/admin/categories HTTP/1.1

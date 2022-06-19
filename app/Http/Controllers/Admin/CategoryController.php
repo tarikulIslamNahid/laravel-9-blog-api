@@ -100,10 +100,11 @@ public function edit($slug){
             } else {
        $category= Category::findOrFail($request->id);
        if($category){
-        $category->cat_name=$request->cat_name;
         if($request->cat_name!=$category->cat_name){
             $category->cat_slug=Category::uniqueSlug($request->cat_name);
         }
+        $category->cat_name=$request->cat_name;
+
         $category->update();
         return response()->json([
             'success'=>true,
