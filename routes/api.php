@@ -33,6 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller(BlogsController::class)->group(function () {
     Route::get('/posts', 'index');
     Route::post('/post/store', 'store');
+    Route::get('/post/{slug}', 'show');
     Route::delete('/post/destroy/{id}', 'destroy');
 
     });

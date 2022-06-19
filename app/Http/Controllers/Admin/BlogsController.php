@@ -93,9 +93,22 @@ class BlogsController extends Controller
      * @param  \App\Models\Admin\blogs  $blogs
      * @return \Illuminate\Http\Response
      */
-    public function show(blogs $blogs)
+    public function show($slug)
     {
-        //
+        try{
+            $blogs= blogs::where('slug',$slug)->with('category')->get();
+            if($blogs){
+                return response()->json([
+                    'success'=>true,
+                    'data'=>$blogs,
+                ]);
+            }
+        }catch(Exception $e){
+            return response()->json([
+                'success'=>false,
+                'data'=>$e->getMessage(),
+            ]);
+        }
     }
 
     /**
