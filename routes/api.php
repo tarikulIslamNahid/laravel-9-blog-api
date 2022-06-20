@@ -34,6 +34,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/posts', 'index');
     Route::post('/post/store', 'store');
     Route::get('/post/{slug}', 'show');
+    Route::post('/post/update', 'update');
+
     Route::delete('/post/destroy/{id}', 'destroy');
 
     });
