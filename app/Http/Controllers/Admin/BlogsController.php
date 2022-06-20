@@ -31,6 +31,23 @@ class BlogsController extends Controller
             ]);
         }
     }
+    public function WebPosts()
+    {
+        try{
+            $blogs= blogs::where('status',1)->orderBy('created_at','desc')->with('category')->get();
+            if($blogs){
+                return response()->json([
+                    'success'=>true,
+                    'data'=>$blogs,
+                ]);
+            }
+        }catch(Exception $e){
+            return response()->json([
+                'success'=>false,
+                'data'=>$e->getMessage(),
+            ]);
+        }
+    }
 
     /**
      * Show the form for creating a new resource.

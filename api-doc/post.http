@@ -35,3 +35,9 @@ GET {{API_URL}}/api/admin/post/{{slug}} HTTP/1.1
 Content-Type: application/json
 accept: application/json
 Authorization:{{TOKEN}}
+
+
+### [ All post for website ]
+GET {{API_URL}}/api/web/posts HTTP/1.1
+Content-Type: application/json
+accept: application/json
