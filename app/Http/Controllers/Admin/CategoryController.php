@@ -54,6 +54,27 @@ class CategoryController extends Controller
         }
 
     }
+    public function CategoryBlogsWeb()
+    {
+        try{
+
+            $categories= Category::whereHas('blogs', function ($query) {
+                $query->where('status','=',1);
+            })->with('blogs')->get();
+            if($categories){
+                return response()->json([
+                    'success'=>true,
+                    'data'=>$categories,
+                ]);
+            }
+        }catch(Exception $e){
+            return response()->json([
+                'success'=>false,
+                'data'=>$e->getMessage(),
+            ]);
+        }
+
+    }
 
 
     /**

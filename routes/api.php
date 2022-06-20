@@ -40,12 +40,14 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     });
 });
-Route::controller(AdminAuthController::class)->group(function () {
+    Route::controller(AdminAuthController::class)->group(function () {
     Route::post('/user/login', 'login');
     });
-Route::controller(BlogsController::class)->group(function () {
+    Route::controller(BlogsController::class)->group(function () {
     Route::get('/web/posts', 'WebPosts');
     Route::get('/web/post/{slug}', 'webPostShow');
-
+    });
+    Route::controller(CategoryController::class)->group(function () {
+    Route::get('/web/categories/blogs', 'CategoryBlogsWeb');
     });
 
