@@ -1,5 +1,4 @@
 ## Backend OR Api Project setup 
-## Frontend Project setup ```Go to frontend setup instruction``` 
 
 Clone the ```[API Project ]```
 
