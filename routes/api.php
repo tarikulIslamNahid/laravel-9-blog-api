@@ -28,14 +28,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/category/update', 'update');
     Route::delete('/category/destroy/{id}', 'destroy');
     Route::get('/categories/blogs', 'CategoryBlogs');
-
     });
     Route::controller(BlogsController::class)->group(function () {
     Route::get('/posts', 'index');
     Route::post('/post/store', 'store');
     Route::get('/post/{slug}', 'show');
+    Route::get('/post/status/{id}', 'status');
     Route::post('/post/update', 'update');
-
     Route::delete('/post/destroy/{id}', 'destroy');
 
     });

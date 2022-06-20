@@ -19,6 +19,7 @@ return new class extends Migration
             $table->mediumText('slug')->unique();
             $table->text('description');
             $table->integer('views')->default(0);
+            $table->integer('status')->default(1);
             $table->integer('created_by');
             $table->timestamps();
         });

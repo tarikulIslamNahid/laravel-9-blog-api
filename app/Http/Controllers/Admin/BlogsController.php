@@ -184,4 +184,30 @@ class BlogsController extends Controller
         ]);
     }
     }
+
+    public function status($id)
+    {
+        try {
+
+            $blogs = blogs::findOrFail($id);
+        if ($blogs->status == 1) {
+            $blogs->status = 0;
+            $success = 'Deactived Successfully';
+        } elseif ($blogs->status == 0) {
+            $blogs->status = 1;
+            $success = 'Activeted Successfully';
+        }
+        $blogs->update();
+        return response()->json([
+            'success'=>true,
+            'data'=>$success,
+        ]);
+    } catch (Exception $e) {
+        return response()->json([
+            'success'=>false,
+            'data'=>$e->getMessage(),
+        ]);
+    }
+
+    }
 }
