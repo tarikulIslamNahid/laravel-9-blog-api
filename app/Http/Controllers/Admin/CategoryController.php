@@ -54,13 +54,13 @@ class CategoryController extends Controller
         }
 
     }
-    public function CategoryBlogsWeb()
+    public function CategoryBlogsWeb($slug)
     {
         try{
 
-            $categories= Category::whereHas('blogs', function ($query) {
+            $categories= Category::where('cat_slug','=',$slug)->whereHas('blogs', function ($query) {
                 $query->where('status','=',1);
-            })->with('blogs')->get();
+            })->with('blogs.category')->get();
             if($categories){
                 return response()->json([
                     'success'=>true,

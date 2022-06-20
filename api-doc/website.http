@@ -1,0 +1,19 @@
+@API_URL=http://127.0.0.1:8000
+
+### [ All post for website ]
+GET {{API_URL}}/api/web/posts HTTP/1.1
+Content-Type: application/json
+accept: application/json
+
+### [ Show Post ]
+@post_slug=this-is-update-title
+GET {{API_URL}}/api/web/post/{{post_slug}} HTTP/1.1
+Content-Type: application/json
+accept: application/json
+
+
+### [ Show category posts for web ]
+@slug=frontend-development
+GET {{API_URL}}/api/web/categories/blogs/{{slug}} HTTP/1.1
+Content-Type: application/json
+accept: application/json

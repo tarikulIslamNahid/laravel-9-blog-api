@@ -48,6 +48,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/web/post/{slug}', 'webPostShow');
     });
     Route::controller(CategoryController::class)->group(function () {
-    Route::get('/web/categories/blogs', 'CategoryBlogsWeb');
+    Route::get('/web/categories/blogs/{slug}', 'CategoryBlogsWeb');
     });
 

@@ -1,5 +1,5 @@
 @API_URL=http://127.0.0.1:8000
-@TOKEN=Bearer 39|vlIvjTsqNTwVR6Q402tekUY8CaYhtoP3yYvPNXfy
+@TOKEN=Bearer 41|8pPXfPkjJIKe1zIZXG4HuUhnVo83dSjzrGUdhCGo
 
 ### [ All post ]
 GET {{API_URL}}/api/admin/posts HTTP/1.1
@@ -21,6 +21,36 @@ Authorization:{{TOKEN}}
 
 }
 
+### [ Show Post ]
+@slug=what-is-a-front-end-developer
+GET {{API_URL}}/api/admin/post/{{slug}} HTTP/1.1
+Content-Type: application/json
+accept: application/json
+Authorization:{{TOKEN}}
+
+
+### [ status change by id ]
+@post_id=9
+GET {{API_URL}}/api/admin/post/status/{{post_id}} HTTP/1.1
+Content-Type: application/json
+accept: application/json
+Authorization:{{TOKEN}}
+
+### [ update post ]
+POST {{API_URL}}/api/admin/post/update HTTP/1.1
+Content-Type: application/json
+accept: application/json
+Authorization:{{TOKEN}}
+
+{
+"id":11,
+"title":"this is update title",
+"description":"this is blog content",
+"cat_id":"4,6,"
+
+
+}
+
 ### [ Delete Post ]
 @BLOG_ID=5
 DELETE {{API_URL}}/api/admin/post/destroy/{{BLOG_ID}} HTTP/1.1
@@ -29,15 +59,6 @@ accept: application/json
 Authorization:{{TOKEN}}
 
 
-### [ Show Post ]
-@slug=this-is-check-title
-GET {{API_URL}}/api/admin/post/{{slug}} HTTP/1.1
-Content-Type: application/json
-accept: application/json
-Authorization:{{TOKEN}}
 
 
-### [ All post for website ]
-GET {{API_URL}}/api/web/posts HTTP/1.1
-Content-Type: application/json
-accept: application/json
+
