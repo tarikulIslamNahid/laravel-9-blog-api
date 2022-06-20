@@ -127,6 +127,23 @@ class BlogsController extends Controller
             ]);
         }
     }
+    public function webPostShow($slug)
+    {
+        try{
+            $blogs= blogs::where(['slug'=>$slug,'status'=>1])->with('category')->get();
+            if($blogs){
+                return response()->json([
+                    'success'=>true,
+                    'data'=>$blogs,
+                ]);
+            }
+        }catch(Exception $e){
+            return response()->json([
+                'success'=>false,
+                'data'=>$e->getMessage(),
+            ]);
+        }
+    }
 
     /**
      * Update the specified resource in storage.

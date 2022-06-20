@@ -45,5 +45,7 @@ Route::controller(AdminAuthController::class)->group(function () {
     });
 Route::controller(BlogsController::class)->group(function () {
     Route::get('/web/posts', 'WebPosts');
+    Route::get('/web/post/{slug}', 'webPostShow');
+
     });
 
